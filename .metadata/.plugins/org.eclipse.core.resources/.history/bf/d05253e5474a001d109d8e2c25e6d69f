@@ -1,0 +1,7 @@
+package src.org.mervegundogmus.java;
+
+public class Restaurant implements Runnable{
+	
+	
+
+}

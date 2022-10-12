@@ -1,0 +1,63 @@
+package src.org.mervegundogmus.java;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Random;
+
+public class Restaurant implements Runnable {
+	
+	private ArrayList<Chef> chefs;
+	private ArrayList<Waiter> waiters;
+	private HashMap<Customer, Long> customersWithEnterTime;
+	private HashMap<Customer, String> orderLog;
+	private HashMap<Customer, String> cookLog;
+	private HashMap<Customer, String> readyToServeOrders;
+	private int chefCount =  2;
+	private int waiterCount = 3;
+	private int tableCount = 5;
+	private int customerCounter = 0;
+	private long maxTimeForSitting = 12000L;
+	private Calendar calendar;
+	private Thread thread;
+	
+	public Restaurant(int chefCount, int waiterCount, int tableCount, long maxTimeForSitting) {
+		this.chefs = new ArrayList<>();
+		this.waiters = new ArrayList<>();
+		this.customersWithEnterTime = new HashMap<>();
+		readyToServeOrders = new HashMap<>();
+		cookLog = new HashMap<>();
+		calendar = new GregorianCalendar();
+		orderLog = new HashMap<>();
+		this.chefCount = chefCount;
+		this.waiterCount = waiterCount;
+		this.tableCount = tableCount;
+		this.maxTimeForSitting = maxTimeForSitting;
+	}
+	
+	public Restaurant() {
+		orderLog = new HashMap<>();
+		chefs = new ArrayList<>();
+		waiters = new ArrayList<>();
+		calendar = new GregorianCalendar();
+		customersWithEnterTime = new HashMap();
+		cookLog = new HashMap<>();
+		readyToServeOrders = new HashMap<>();
+	}
+	
+	public boolean isGoodForNewCustomer() {
+		
+		Random rand = new Random();
+		return rand.nextBoolean();
+	}
+	
+	public void start() {
+		if(thread == null) {
+			thread = new Thread(this, "Restaurant");
+		}
+		thread.start();
+	}
+	
+
+}
